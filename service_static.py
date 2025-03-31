@@ -1,11 +1,12 @@
-from Graph import Graph
-from GraphConverter import GraphConverter
+from graph import Graph
+from graph_converter import GraphConverter
 
 class Service:
 
-    """Вывод текстового меню для ориентации пользователя в программе"""
     @staticmethod
     def menu():
+        """Вывод текстового меню для ориентации пользователя в программе"""
+
         print(
             "Какой граф вы хотите создать?",
             "1) Простой граф",
@@ -16,9 +17,10 @@ class Service:
             sep="\n"
         )
 
-    """Запрос у пользователя типа графа"""
     @staticmethod
     def get_type() -> str:
+        """Запрос у пользователя типа графа"""
+
         choice = input(
             "Тип графа: "
         ).strip()
@@ -31,23 +33,26 @@ class Service:
 
         return types.get(choice)
 
-    """Запрос у пользователя размерность графа"""
     @staticmethod
     def get_size() -> int:
+        """Запрос у пользователя размерность графа"""
+
         size = input(
             "Размерность матрицы: "
         ).strip()
 
         return int(size)
 
-    """Вывод пар множеств"""
     @staticmethod
     def display_pairs_of_sets(graph: Graph):
+        """Вывод пар множеств"""
+
         print(GraphConverter.converter_to_pairs_of_sets(graph))
 
-    """Вывод матрицы инцендентнотсти"""
     @staticmethod
     def display_adjacency_matrix(graph: Graph):
+        """Вывод матрицы инцендентнотсти"""
+
         print(GraphConverter.converter_to_matrix_adjacency_matrix(graph))
 
 

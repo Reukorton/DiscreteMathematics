@@ -1,6 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from Graph import Graph
+from graph import Graph
 
 class GraphVisualizer:
     @staticmethod

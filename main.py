@@ -1,6 +1,6 @@
-from Graph import Graph
-from Service_Static import Service
-from GraphVisualizer import GraphVisualizer
+from graph import Graph
+from service_static import Service
+from graph_visualizer import GraphVisualizer
 
 if __name__ == "__main__":
     Service.menu()
