@@ -17,8 +17,8 @@ class GraphConverter:
         return pairs_of_sets
 
     @staticmethod
-    def converter_to_matrix_adjacency_matrix(graph: Graph):
-        """Из матрицы смедности получаем матрицу инцендетности"""
+    def converter_to_matrix_adjacency_matrix(graph: Graph) -> []:
+        """Из матрицы смежности получаем матрицу инцендетности"""
 
         matrix = np.zeros((graph.size, len(GraphConverter.converter_to_pairs_of_sets(graph))), dtype=int)
         k = 0
@@ -29,4 +29,7 @@ class GraphConverter:
                         matrix[i, k] += 1
                         matrix[j, k] += 1
                         k += 1
+
         return matrix
+
+

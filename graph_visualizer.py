@@ -5,6 +5,8 @@ from graph import Graph
 class GraphVisualizer:
     @staticmethod
     def draf_graph(graph: Graph):
+        """Отрисовка графа"""
+
         size = graph.size
         G = nx.MultiGraph()
         G.add_nodes_from(range(size))
@@ -20,7 +22,7 @@ class GraphVisualizer:
                         if i == j:
                             if i not in loops:
                                 loops[i] = []
-                            loops[i].append((i, j))  # Петли добавляем отдельно
+                            loops[i].append((i, j))
                         else:
                             edges.append((i, j, k))
 

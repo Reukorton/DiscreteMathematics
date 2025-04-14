@@ -1,12 +1,11 @@
 import numpy as np
 import random
 
-
 class Graph:
     def __init__(self, size: int, graph_type: str):
-        self.size = size  # Количество вершин
-        self.graph_type = graph_type  # Тип графа
-        self.adjacency_matrix = np.zeros((size, size), dtype=int)  # Инициализация матрицы смежности
+        self.size = size
+        self.graph_type = graph_type
+        self.adjacency_matrix = np.zeros((size, size), dtype=int)
         self.generate_graph()
 
     def generate_graph(self):

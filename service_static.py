@@ -1,8 +1,8 @@
 from graph import Graph
 from graph_converter import GraphConverter
+import numpy as np
 
 class Service:
-
     @staticmethod
     def menu():
         """Вывод текстового меню для ориентации пользователя в программе"""
@@ -55,4 +55,16 @@ class Service:
 
         print(GraphConverter.converter_to_matrix_adjacency_matrix(graph))
 
+    @staticmethod
+    def multiplication_matrix(matrix1, matrix2):
+        size = len(matrix1)
+
+        matrix = np.zeros((size, size), dtype=int)
+
+        for i in range(size):
+            for j in range(size):
+                for k in range(size):
+                    matrix[i, j] += matrix1[i, k] * matrix2[k, j]
+
+        return matrix
 
