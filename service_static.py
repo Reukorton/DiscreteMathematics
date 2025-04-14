@@ -68,3 +68,11 @@ class Service:
 
         return matrix
 
+    @staticmethod
+    def power_matrix(matrix, power):
+        result = np.identity(len(matrix), dtype=int)
+        for _ in range(power):
+            result = Service.multiplication_matrix(result, matrix)
+        return result
+
+
