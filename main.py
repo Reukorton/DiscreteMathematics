@@ -6,6 +6,7 @@ if __name__ == "__main__":
     Service.menu()
     graph = Graph(Service.get_size(), Service.get_type())
     graph.display_matrix()
+    print(graph.distance_matrix)
     GraphVisualizer.draf_graph(graph)
     Service.display_pairs_of_sets(graph)
     Service.display_adjacency_matrix(graph)
