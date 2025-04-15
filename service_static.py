@@ -1,5 +1,3 @@
-from graph import Graph
-from graph_converter import GraphConverter
 import numpy as np
 
 class Service:
@@ -44,19 +42,9 @@ class Service:
         return int(size)
 
     @staticmethod
-    def display_pairs_of_sets(graph: Graph):
-        """Вывод пар множеств"""
+    def multiplication_matrix(matrix1: np.ndarray, matrix2: np.ndarray) -> np.ndarray:
+        """Перемножение матрицы на матрицу"""
 
-        print(GraphConverter.converter_to_pairs_of_sets(graph))
-
-    @staticmethod
-    def display_adjacency_matrix(graph: Graph):
-        """Вывод матрицы инцендентнотсти"""
-
-        print(GraphConverter.converter_to_matrix_adjacency_matrix(graph))
-
-    @staticmethod
-    def multiplication_matrix(matrix1, matrix2):
         size = len(matrix1)
 
         matrix = np.zeros((size, size), dtype=int)
@@ -69,10 +57,7 @@ class Service:
         return matrix
 
     @staticmethod
-    def power_matrix(matrix, power):
-        result = np.identity(len(matrix), dtype=int)
-        for _ in range(power):
-            result = Service.multiplication_matrix(result, matrix)
-        return result
-
-
+    def display_matrix(*args):
+        """Вывод матрицы"""
+        for arg in args:
+            print(arg)
