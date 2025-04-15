@@ -56,7 +56,9 @@ class Service:
         print(GraphConverter.converter_to_matrix_adjacency_matrix(graph))
 
     @staticmethod
-    def multiplication_matrix(matrix1, matrix2):
+    def multiplication_matrix(matrix1: np.ndarray, matrix2: np.ndarray) -> np.ndarray:
+        """Перемножение матрицы на матрицу"""
+
         size = len(matrix1)
 
         matrix = np.zeros((size, size), dtype=int)
@@ -69,10 +71,13 @@ class Service:
         return matrix
 
     @staticmethod
-    def power_matrix(matrix, power):
+    def power_matrix(matrix: np.ndarray, power: int) -> np.ndarray:
+        """Возмедение матрицы в степень power"""
+
         result = np.identity(len(matrix), dtype=int)
         for _ in range(power):
             result = Service.multiplication_matrix(result, matrix)
+
         return result
 
 
