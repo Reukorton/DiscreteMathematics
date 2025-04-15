@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from service_static import Service
+from matrix_converter import MatrixConverter
 
 class Graph:
     def __init__(self, size: int, graph_type: str):
@@ -8,7 +8,13 @@ class Graph:
         self.graph_type = graph_type
         self.adjacency_matrix = np.zeros((size, size), dtype=int)
         self.generate_graph()
-        self.distance_matrix = self.generate_distance_matrix()
+        self.pairs_of_sets = \
+            MatrixConverter.converter_to_pairs_of_sets(self.adjacency_matrix)
+        self.incidence_matrix = \
+            MatrixConverter.converter_to_matrix_incidence_matrix(self.adjacency_matrix)
+        self.distance_matrix =  \
+            MatrixConverter.converter_to_matrix_distance(self.adjacency_matrix)
+
 
     def generate_graph(self):
         """Генерация матрицы смежности в зависимости от типа графа."""
@@ -65,25 +71,3 @@ class Graph:
         for i in range(self.size):
             for j in range(i + 1, self.size):
                 self.adjacency_matrix[i, j] = self.adjacency_matrix[j, i] = random.choice([0, 1, 2, 3])
-
-    def display_matrix(self):
-        """Выводит матрицу смежности."""
-
-        print(self.adjacency_matrix)
-
-    def generate_distance_matrix(self) -> np.ndarray:
-        """Генерация матрицы расстояний"""
-
-        matrix_distances = np.zeros((self.size, self.size), dtype=int)
-        powered = self.adjacency_matrix.copy()
-
-        for power in range(1, self.size + 1):
-            powered = Service.multiplication_matrix(powered, self.adjacency_matrix)
-            for i in range(self.size):
-                for j in range(i + 1, self.size):
-                    if powered[i, j] > 0 and matrix_distances[i, j] == 0:
-                        matrix_distances[i, j] = matrix_distances[j, i] = power
-
-        return matrix_distances
-
-
