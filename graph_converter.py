@@ -3,7 +3,7 @@ import numpy as np
 
 class GraphConverter:
     @staticmethod
-    def converter_to_pairs_of_sets(graph: Graph) -> []:
+    def converter_to_pairs_of_sets(graph: Graph) -> np.ndarray:
         """Из матрицы смежности получаем пары значений"""
 
         pairs_of_sets = []
@@ -17,7 +17,7 @@ class GraphConverter:
         return pairs_of_sets
 
     @staticmethod
-    def converter_to_matrix_adjacency_matrix(graph: Graph) -> []:
+    def converter_to_matrix_adjacency_matrix(graph: Graph) -> np.ndarray:
         """Из матрицы смежности получаем матрицу инцендетности"""
 
         matrix = np.zeros((graph.size, len(GraphConverter.converter_to_pairs_of_sets(graph))), dtype=int)
