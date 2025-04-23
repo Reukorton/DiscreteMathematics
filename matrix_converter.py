@@ -36,6 +36,7 @@ class MatrixConverter:
 
     @staticmethod
     def converter_to_matrix_distance(matrix: np.ndarray) -> np.ndarray:
+        """Из матрицы смежности в матрицу расстояний"""
         size = len(matrix)
         distances = matrix.copy()
         powered = matrix.copy()
