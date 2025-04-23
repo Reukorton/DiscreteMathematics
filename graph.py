@@ -12,8 +12,10 @@ class Graph:
             MatrixConverter.converter_to_pairs_of_sets(self.adjacency_matrix)
         self.incidence_matrix = \
             MatrixConverter.converter_to_matrix_incidence_matrix(self.adjacency_matrix)
-        self.distance_matrix =  \
-            MatrixConverter.converter_to_matrix_distance(self.adjacency_matrix)
+        if graph_type == "simple" or graph_type == "complete":
+            self.distance_matrix =  \
+                MatrixConverter.converter_to_matrix_distance(self.adjacency_matrix)
+            self.eccentricities = MatrixConverter.get_eccentricities(self.distance_matrix)
 
 
     def generate_graph(self):

@@ -36,6 +36,7 @@ class MatrixConverter:
 
     @staticmethod
     def converter_to_matrix_distance(matrix: np.ndarray) -> np.ndarray:
+        """Из матрицы смежности в матрицу расстояний"""
         size = len(matrix)
         distances = matrix.copy()
         powered = matrix.copy()
@@ -48,3 +49,16 @@ class MatrixConverter:
                         distances[i, j] = distances[j, i] = power
 
         return distances
+
+    @staticmethod
+    def get_eccentricities(distances: np.ndarray) -> list[int]:
+        eccentricities = []
+        for i in range(len(distances)):
+            ecc = max(distances[i][j] for j in range(len(distances)) if i != j)
+            eccentricities.append(ecc)
+
+        return eccentricities
+
+    @staticmethod
+    def get_radius_and_diameter(eccentricities: list[int]) -> tuple[int, int]:
+        return min(eccentricities), max(eccentricities)
