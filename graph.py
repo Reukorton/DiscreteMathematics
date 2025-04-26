@@ -1,6 +1,6 @@
 import numpy as np
 import random
-from matrix_converter import MatrixConverter
+from matrix_transformation import MatrixTransformation
 
 class Graph:
     def __init__(self, size: int, graph_type: str):
@@ -9,15 +9,15 @@ class Graph:
         self.adjacency_matrix = np.zeros((size, size), dtype=int)
         self.generate_graph()
         self.pairs_of_sets = \
-            MatrixConverter.converter_to_pairs_of_sets(self.adjacency_matrix)
+            MatrixTransformation.converter_to_pairs_of_sets(self.adjacency_matrix)
         self.incidence_matrix = \
-            MatrixConverter.converter_to_matrix_incidence_matrix(self.adjacency_matrix)
+            MatrixTransformation.converter_to_matrix_incidence_matrix(self.adjacency_matrix)
         if graph_type == "simple" or graph_type == "complete":
             self.distance_matrix =  \
-                MatrixConverter.converter_to_matrix_distance(self.adjacency_matrix)
-            self.eccentricities = MatrixConverter.get_eccentricities(self.distance_matrix)
-            self.central_vertices = MatrixConverter.find_central_vertices(self.eccentricities)
-            self.peripheral_vertices = MatrixConverter.find_peripheral_vertices(self.eccentricities)
+                MatrixTransformation.converter_to_matrix_distance(self.adjacency_matrix)
+            self.eccentricities = MatrixTransformation.get_eccentricities(self.distance_matrix)
+            self.central_vertices = MatrixTransformation.find_central_vertices(self.eccentricities)
+            self.peripheral_vertices = MatrixTransformation.find_peripheral_vertices(self.eccentricities)
 
 
     def generate_graph(self):

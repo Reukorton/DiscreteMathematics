@@ -1,7 +1,7 @@
 import numpy as np
 from service_static import Service
 
-class MatrixConverter:
+class MatrixTransformation:
     @staticmethod
     def converter_to_pairs_of_sets(matrix: np.ndarray) -> np.ndarray:
         """Из матрицы смежности получаем пары значений"""
@@ -22,7 +22,7 @@ class MatrixConverter:
         """Из матрицы смежности получаем матрицу инцендетности"""
 
         size = len(matrix)
-        incidence_matrix = np.zeros((size, len(MatrixConverter.converter_to_pairs_of_sets(matrix))), dtype=int)
+        incidence_matrix = np.zeros((size, len(MatrixTransformation.converter_to_pairs_of_sets(matrix))), dtype=int)
         k = 0
         for i in range(size):
             for j in range(i, size):
@@ -52,6 +52,7 @@ class MatrixConverter:
 
     @staticmethod
     def get_eccentricities(distances: np.ndarray) -> list[int]:
+        """Нахождение списка инцентриситетов"""
         eccentricities = []
         for i in range(len(distances)):
             ecc = max(distances[i][j] for j in range(len(distances)) if i != j)
@@ -61,14 +62,17 @@ class MatrixConverter:
 
     @staticmethod
     def get_radius_and_diameter(eccentricities: list[int]) -> tuple[int, int]:
+        """Нахождение радиуса и диаметра графа"""
         return min(eccentricities), max(eccentricities)
 
     @staticmethod
     def find_central_vertices(eccentricities: list[int]) -> list[int]:
+        """Нахождение центральных вершин"""
         min_ecc = min(eccentricities)
         return [index for index, value in enumerate(eccentricities) if value == min_ecc]
 
     @staticmethod
     def find_peripheral_vertices(eccentricities: list[int]) -> list[int]:
+        """Нахождение переферийных вершин"""
         max_ecc = max(eccentricities)
         return [index for index, value in enumerate(eccentricities) if value == max_ecc]
