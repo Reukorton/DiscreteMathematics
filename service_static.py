@@ -61,11 +61,3 @@ class Service:
         """Вывод матрицы"""
         for arg in args:
             print(arg)
-
-    @staticmethod
-    def get_eccentricities(distances: np.ndarray) -> list[int]:
-        return [max(row) for row in distances]
-
-    @staticmethod
-    def get_radius_and_diameter(eccentricities: list[int]) -> tuple[int, int]:
-        return min(eccentricities), max(eccentricities)
