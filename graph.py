@@ -16,6 +16,8 @@ class Graph:
             self.distance_matrix =  \
                 MatrixConverter.converter_to_matrix_distance(self.adjacency_matrix)
             self.eccentricities = MatrixConverter.get_eccentricities(self.distance_matrix)
+            self.central_vertices = MatrixConverter.find_central_vertices(self.eccentricities)
+            self.peripheral_vertices = MatrixConverter.find_peripheral_vertices(self.eccentricities)
 
 
     def generate_graph(self):
