@@ -16,6 +16,10 @@ if __name__ == "__main__":
                               graph.distance_matrix)
         Service.display_matrix("Эксцентриситеты вершин:",
                                graph.eccentricities)
+        Service.display_matrix("Центральные вершины:",
+                               graph.central_vertices)
+        Service.display_matrix("Переферийные вершины:",
+                               graph.peripheral_vertices)
     except AttributeError:
         print("Матрица растояний не расчитывается для графов с петлями и кратными ребрами")
 

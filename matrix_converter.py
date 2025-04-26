@@ -62,3 +62,13 @@ class MatrixConverter:
     @staticmethod
     def get_radius_and_diameter(eccentricities: list[int]) -> tuple[int, int]:
         return min(eccentricities), max(eccentricities)
+
+    @staticmethod
+    def find_central_vertices(eccentricities: list[int]) -> list[int]:
+        min_ecc = min(eccentricities)
+        return [index for index, value in enumerate(eccentricities) if value == min_ecc]
+
+    @staticmethod
+    def find_peripheral_vertices(eccentricities: list[int]) -> list[int]:
+        max_ecc = max(eccentricities)
+        return [index for index, value in enumerate(eccentricities) if value == max_ecc]
