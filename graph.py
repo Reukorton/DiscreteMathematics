@@ -75,3 +75,47 @@ class Graph:
         for i in range(self.size):
             for j in range(i + 1, self.size):
                 self.adjacency_matrix[i, j] = self.adjacency_matrix[j, i] = random.choice([0, 1, 2, 3])
+
+    def find_max_empty_subgraph(self):
+        """Поиск максимально пустого подграфа без использования networkx"""
+
+        n = len(self.adjacency_matrix)
+        selected_vertices = []
+
+        for i in range(n):
+            # Проверяем, не связан ли i с уже выбранными вершинами
+            is_independent = True
+            for j in selected_vertices:
+                if self.adjacency_matrix[i][j] > 0 or self.adjacency_matrix[j][i] > 0:
+                    is_independent = False
+                    break
+            if is_independent:
+                selected_vertices.append(i)
+
+        print("Максимальное пустое подмножество :", selected_vertices)
+        return selected_vertices
+
+    def color_graph(self):
+        """Простая раскраска графа 4"""
+        n = self.size
+        result = [-1] * n
+        result[0] = 0
+
+        for u in range(1, n):
+            used = set()
+            for v in range(n):
+                if self.adjacency_matrix[u][v] > 0 and result[v] != -1:
+                    used.add(result[v])
+            color = 0
+            while color in used:
+                color += 1
+            result[u] = color
+
+        self.colors = result
+        self.chromatic_number = max(result) + 1
+        print(f"Раскраска графа: {self.colors}")
+        print(f"Хроматическое число графа: {self.chromatic_number}")
+
+    def get_vertex_colors(self):
+        """Вернёт цвета вершин, если они были раскрашены"""
+        return getattr(self, "colors", [])
