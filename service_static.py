@@ -57,7 +57,7 @@ class Service:
         return matrix
 
     @staticmethod
-    def display_matrix(*args):
+    def display_info(*args):
         """Вывод матрицы"""
         for arg in args:
             print(arg)

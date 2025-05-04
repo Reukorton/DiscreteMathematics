@@ -18,6 +18,8 @@ class Graph:
             self.eccentricities = MatrixTransformation.get_eccentricities(self.distance_matrix)
             self.central_vertices = MatrixTransformation.find_central_vertices(self.eccentricities)
             self.peripheral_vertices = MatrixTransformation.find_peripheral_vertices(self.eccentricities)
+        self.colors = None
+        self.chromatic_number = None
 
 
     def generate_graph(self):
@@ -77,9 +79,8 @@ class Graph:
                 self.adjacency_matrix[i, j] = self.adjacency_matrix[j, i] = random.choice([0, 1, 2, 3])
 
     def find_max_empty_subgraph(self):
-        """Поиск максимально пустого подграфа без использования networkx"""
-
-        n = len(self.adjacency_matrix)
+        """Поиск максимально пустого подграфа"""
+        n = self.size
         selected_vertices = []
 
         for i in range(n):
@@ -92,30 +93,4 @@ class Graph:
             if is_independent:
                 selected_vertices.append(i)
 
-        print("Максимальное пустое подмножество :", selected_vertices)
         return selected_vertices
-
-    def color_graph(self):
-        """Простая раскраска графа 4"""
-        n = self.size
-        result = [-1] * n
-        result[0] = 0
-
-        for u in range(1, n):
-            used = set()
-            for v in range(n):
-                if self.adjacency_matrix[u][v] > 0 and result[v] != -1:
-                    used.add(result[v])
-            color = 0
-            while color in used:
-                color += 1
-            result[u] = color
-
-        self.colors = result
-        self.chromatic_number = max(result) + 1
-        print(f"Раскраска графа: {self.colors}")
-        print(f"Хроматическое число графа: {self.chromatic_number}")
-
-    def get_vertex_colors(self):
-        """Вернёт цвета вершин, если они были раскрашены"""
-        return getattr(self, "colors", [])
