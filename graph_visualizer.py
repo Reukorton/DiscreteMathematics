@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from graph import Graph
 
+
 class GraphVisualizer:
     @staticmethod
     def draf_graph(graph: Graph):
@@ -33,7 +34,14 @@ class GraphVisualizer:
         pos = nx.spring_layout(G)
 
         # Рисуем вершины и метки
-        nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=400)
+        colors = graph.get_vertex_colors()
+        color_map = ['lightblue', 'orange', 'green', 'red', 'purple', 'yellow', 'cyan', 'magenta']
+
+        # Если вершины не были раскрашены, все будут серыми
+        node_colors = [color_map[c % len(color_map)] if c != -1 else 'gray' for c in colors]
+
+        nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=400)
+
         nx.draw_networkx_labels(G, pos, font_size=12)
 
         # Рисуем кратные рёбра с разными радиусами

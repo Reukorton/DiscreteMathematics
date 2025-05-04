@@ -23,4 +23,7 @@ if __name__ == "__main__":
     except AttributeError:
         print("Матрица растояний не расчитывается для графов с петлями и кратными ребрами")
 
+    print("\n=== ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ ===")
+    graph.find_max_empty_subgraph()
+    graph.color_graph()
     GraphVisualizer.draf_graph(graph)
