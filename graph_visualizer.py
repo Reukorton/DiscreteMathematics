@@ -14,6 +14,8 @@ class GraphVisualizer:
         edges = []
         loops = {}
 
+
+
         for i in range(size):
             for j in range(i, size):
                 weight = graph.adjacency_matrix[i, j]
