@@ -18,8 +18,6 @@ class Graph:
             self.eccentricities = MatrixTransformation.get_eccentricities(self.distance_matrix)
             self.central_vertices = MatrixTransformation.find_central_vertices(self.eccentricities)
             self.peripheral_vertices = MatrixTransformation.find_peripheral_vertices(self.eccentricities)
-        self.colors = None
-        self.chromatic_number = None
 
 
     def generate_graph(self):
@@ -77,20 +75,3 @@ class Graph:
         for i in range(self.size):
             for j in range(i + 1, self.size):
                 self.adjacency_matrix[i, j] = self.adjacency_matrix[j, i] = random.choice([0, 1, 2, 3])
-
-    def find_max_empty_subgraph(self):
-        """Поиск максимально пустого подграфа"""
-        n = self.size
-        selected_vertices = []
-
-        for i in range(n):
-            # Проверяем, не связан ли i с уже выбранными вершинами
-            is_independent = True
-            for j in selected_vertices:
-                if self.adjacency_matrix[i][j] > 0 or self.adjacency_matrix[j][i] > 0:
-                    is_independent = False
-                    break
-            if is_independent:
-                selected_vertices.append(i)
-
-        return selected_vertices
