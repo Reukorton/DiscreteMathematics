@@ -34,13 +34,7 @@ class GraphVisualizer:
 
         pos = nx.spring_layout(G)
 
-        colors = graph.colors
-        color_map = ['lightblue', 'orange', 'green', 'red', 'purple', 'yellow', 'cyan', 'magenta']
-
-        # Если вершины не были раскрашены, все будут серыми
-        node_colors = [color_map[color % len(color_map)] if color != -1 else 'gray' for color in colors]
-
-        nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=400)
+        nx.draw_networkx_nodes(G, pos, node_size=400)
 
         nx.draw_networkx_labels(G, pos, font_size=12)
 
@@ -60,23 +54,3 @@ class GraphVisualizer:
                                        connectionstyle=f"arc3,rad={rad}")
 
         plt.show()
-
-    @staticmethod
-    def color_graph(graph:Graph):
-        """Простая раскраска графа 4"""
-        n = graph.size
-        result = [-1] * n
-        result[0] = 0
-
-        for u in range(1, n):
-            used = set()
-            for v in range(n):
-                if graph.adjacency_matrix[u][v] > 0 and result[v] != -1:
-                    used.add(result[v])
-            color = 0
-            while color in used:
-                color += 1
-            result[u] = color
-
-        graph.colors = result
-        graph.chromatic_number = max(result) + 1

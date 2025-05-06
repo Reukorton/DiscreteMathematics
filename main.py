@@ -1,6 +1,7 @@
 from graph import Graph
 from service_static import Service
 from graph_visualizer import GraphVisualizer
+from algorithm_magooWeisman import AlgorithmMagooWeisman
 
 if __name__ == "__main__":
     Service.menu()
@@ -11,6 +12,7 @@ if __name__ == "__main__":
                            graph.pairs_of_sets)
     Service.display_info("Матрица инциндетности:",
                            graph.incidence_matrix)
+    AlgorithmMagooWeisman.creating_expression_Pl(graph.incidence_matrix)
     try:
         Service.display_info("Матрица растояний:",
                               graph.distance_matrix)
@@ -23,8 +25,4 @@ if __name__ == "__main__":
     except AttributeError:
         print("Матрица растояний не расчитывается для графов с петлями и кратными ребрами")
 
-    GraphVisualizer.color_graph(graph)
-    Service.display_info("Максимально пустое подмножество:", graph.find_max_empty_subgraph())
-    Service.display_info("Раскраска графа:", graph.colors)
-    Service.display_info("Хроматическое число графа:", graph.chromatic_number)
     GraphVisualizer.draf_graph(graph)
