@@ -26,5 +26,4 @@ class AlgorithmMagooWeisman:
 
         Pl = Service.expression_conversion(Pl)
         print("Преобразованное выражение законами булевой алгебры Pl = ", " + ".join(Pl))
-
         return Pl
