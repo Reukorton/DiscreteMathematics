@@ -77,12 +77,12 @@ class AlgorithmMagooWeisman:
         return color, colors
 
     @staticmethod
-    def get_chromatic_coloring(matrix: np.ndarray, size: int) -> (int, list[int]):
-        return AlgorithmMagooWeisman.chromatic_coloring_from_pl_list(
-            AlgorithmMagooWeisman.find_complements_for_polynomal(
-                AlgorithmMagooWeisman.creating_expression_Pl(matrix),
-                size
-            ),
-            size
-        )
+    def get_chromatic_coloring(matrix: np.ndarray, size: int) -> tuple[int, list[int]]:
+        Pl = AlgorithmMagooWeisman.creating_expression_Pl(matrix)
+
+        complements = AlgorithmMagooWeisman.find_complements_for_polynomal(Pl, size)
+
+        chromatic_number, colors = AlgorithmMagooWeisman.chromatic_coloring_from_pl_list(complements, size)
+
+        return chromatic_number, colors
 
