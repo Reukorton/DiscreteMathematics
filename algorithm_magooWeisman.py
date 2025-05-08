@@ -1,9 +1,11 @@
 import numpy as np
+
 from service_static import Service
+import re
 
 class AlgorithmMagooWeisman:
     @staticmethod
-    def creating_expression_Pl(matrix: np.ndarray) -> str:
+    def creating_expression_Pl(matrix: np.ndarray) -> set[str]:
         Pl = ""
         for i in range(len(matrix[0])):
             temp = ""
@@ -28,3 +30,59 @@ class AlgorithmMagooWeisman:
         print("Преобразованное выражение законами булевой алгебры Pl = ", " + ".join(Pl))
 
         return Pl
+
+    @staticmethod
+    def find_complements_for_polynomal(Pl: set[str], number_vertices: int) -> list[int]:
+        subsets = []
+
+        for expr in Pl:
+            subsets.append([int(x[1:]) for x in re.findall(r"x\d+", expr)])
+
+        complements = []
+        all_vertices = set(range(number_vertices))
+
+        for subset in subsets:
+            current_set = set(subset)
+            complement = list(all_vertices - current_set)
+            if complement:
+                complements.append(complement)
+
+        return complements
+
+
+
+    @staticmethod
+    def chromatic_coloring_from_pl_list(complements: list[list[int]], number_vertices: int) -> list[int]:
+
+        colors = [-1] * number_vertices
+        color = 0
+
+        while complements:
+            complements.sort(key=lambda s: -len(s))
+            current = complements.pop(0)
+
+            for v in current:
+                if colors[v] == -1:
+                    colors[v] = color
+
+            new_subsets = []
+            for sub in complements:
+                new_sub = [x for x in sub if colors[x] == -1]
+                if new_sub:
+                    new_subsets.append(new_sub)
+            complements = new_subsets
+
+            color += 1
+
+        return color, colors
+
+    @staticmethod
+    def get_chromatic_coloring(matrix: np.ndarray, size: int) -> (int, list[int]):
+        return AlgorithmMagooWeisman.chromatic_coloring_from_pl_list(
+            AlgorithmMagooWeisman.find_complements_for_polynomal(
+                AlgorithmMagooWeisman.creating_expression_Pl(matrix),
+                size
+            ),
+            size
+        )
+

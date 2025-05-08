@@ -1,7 +1,6 @@
 from graph import Graph
 from service_static import Service
 from graph_visualizer import GraphVisualizer
-from algorithm_magooWeisman import AlgorithmMagooWeisman
 
 if __name__ == "__main__":
     Service.menu()
@@ -12,7 +11,11 @@ if __name__ == "__main__":
                            graph.pairs_of_sets)
     Service.display_info("Матрица инциндетности:",
                            graph.incidence_matrix)
-    AlgorithmMagooWeisman.creating_expression_Pl(graph.incidence_matrix)
+    Service.display_info("Хроматическое число:",
+                         graph.chromatic_number)
+    Service.display_info("Раскраска графа:",
+                         graph.colors)
+
     try:
         Service.display_info("Матрица растояний:",
                               graph.distance_matrix)
