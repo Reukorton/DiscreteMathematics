@@ -1,6 +1,7 @@
 import numpy as np
 import random
 from matrix_transformation import MatrixTransformation
+from algorithm_magooWeisman import AlgorithmMagooWeisman
 
 class Graph:
     def __init__(self, size: int, graph_type: str):
@@ -8,16 +9,22 @@ class Graph:
         self.graph_type = graph_type
         self.adjacency_matrix = np.zeros((size, size), dtype=int)
         self.generate_graph()
+
         self.pairs_of_sets = \
             MatrixTransformation.converter_to_pairs_of_sets(self.adjacency_matrix)
         self.incidence_matrix = \
             MatrixTransformation.converter_to_matrix_incidence_matrix(self.adjacency_matrix)
+        self.chromatic_number, self.colors = \
+            AlgorithmMagooWeisman.get_chromatic_coloring(self.incidence_matrix, self.size)
         if graph_type == "simple" or graph_type == "complete":
             self.distance_matrix =  \
                 MatrixTransformation.converter_to_matrix_distance(self.adjacency_matrix)
-            self.eccentricities = MatrixTransformation.get_eccentricities(self.distance_matrix)
-            self.central_vertices = MatrixTransformation.find_central_vertices(self.eccentricities)
-            self.peripheral_vertices = MatrixTransformation.find_peripheral_vertices(self.eccentricities)
+            self.eccentricities = \
+                MatrixTransformation.get_eccentricities(self.distance_matrix)
+            self.central_vertices = \
+                MatrixTransformation.find_central_vertices(self.eccentricities)
+            self.peripheral_vertices = \
+                MatrixTransformation.find_peripheral_vertices(self.eccentricities)
 
 
     def generate_graph(self):

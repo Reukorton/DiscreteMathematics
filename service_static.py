@@ -64,7 +64,8 @@ class Service:
             print(arg)
 
     @staticmethod
-    def multiplying_brackets(Pl: str) -> str:
+    def multiplying_brackets(Pl: str) -> set[str]:
+        """Преоброзование выражения вида (a + b) * (c + d) * ..., где все abcd... буквы или обозначения"""
         expressions = Pl.split(" * ")
         for i in range(len(expressions)): expressions[i] = expressions[i][1:-1].split(" + ")
 
@@ -85,6 +86,7 @@ class Service:
 
     @staticmethod
     def sort_summands(summands: list[str]) -> list[str]:
+        """Сортировка каждого значения в выражение вида x1x2x3... по x[1:]"""
         sorted_result = []
         for summand in summands:
             variables = [summand[i] + summand[i + 1] for i in range(0, len(summand), 2)]
