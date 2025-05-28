@@ -6,6 +6,7 @@ import re
 class AlgorithmMagooWeisman:
     @staticmethod
     def creating_expression_Pl(matrix: np.ndarray) -> set[str]:
+        """Создание конечного Pl для алгоритма Магу-Вейсмана"""
         Pl = ""
         for i in range(len(matrix[0])):
             temp = ""
@@ -33,6 +34,7 @@ class AlgorithmMagooWeisman:
 
     @staticmethod
     def find_complements_for_polynomal(Pl: set[str], number_vertices: int) -> list[int]:
+        """Преобразует выражения вида х0х1х2 в [0, 1, 2]"""
         subsets = []
 
         for expr in Pl:
@@ -53,7 +55,8 @@ class AlgorithmMagooWeisman:
 
     @staticmethod
     def chromatic_coloring_from_pl_list(complements: list[list[int]], number_vertices: int) -> list[int]:
-
+        """Нахождение хроматического числа графа"""
+        """Присвоение цвета каждой вершине графа"""
         colors = [-1] * number_vertices
         color = 0
 
@@ -78,6 +81,7 @@ class AlgorithmMagooWeisman:
 
     @staticmethod
     def get_chromatic_coloring(matrix: np.ndarray, size: int) -> tuple[int, list[int]]:
+        """Использует все методы в этом классе для получения итогового результата алгоритма Магу-Вейсмана"""
         Pl = AlgorithmMagooWeisman.creating_expression_Pl(matrix)
 
         complements = AlgorithmMagooWeisman.find_complements_for_polynomal(Pl, size)
@@ -85,4 +89,3 @@ class AlgorithmMagooWeisman:
         chromatic_number, colors = AlgorithmMagooWeisman.chromatic_coloring_from_pl_list(complements, size)
 
         return chromatic_number, colors
-

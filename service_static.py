@@ -97,6 +97,8 @@ class Service:
 
     @staticmethod
     def expression_conversion(Pl: set[str]) -> set[str]:
+        """Преобразование выражение по законам булевой алгебры"""
+        """Pl = {'x0x1', 'x0x1x2', 'x2x3', 'x2x3x4'} -> результат: {'x0x1', 'x2x3'}"""
         to_remove = set()
         parsed = {expr: set(re.findall(r'x\d+', expr)) for expr in Pl}
 
