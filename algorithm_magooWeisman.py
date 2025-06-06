@@ -32,6 +32,7 @@ class AlgorithmMagooWeisman:
 
         return Pl
 
+
     @staticmethod
     def find_complements_for_polynomal(Pl: set[str], number_vertices: int) -> list[int]:
         """Преобразует выражения вида х0х1х2 в [0, 1, 2]"""
